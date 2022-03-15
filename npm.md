@@ -11,6 +11,8 @@ npm i -D webpack-dev-server
 
 # Плагин для работы с файлами html
 npm install -D html-webpack-plugin
+# Плагин для сжатия css
+npm install -D mini-css-extract-plugin
 # Плагин для очистки старых файлов bundle в папке dist
 npm install -D clean-webpack-plugin
 # Плагин для переноса любых файлов по директории проекта
@@ -27,12 +29,13 @@ npm i -D xml-loader
 npm i -D csv-loader
 npm i -D papaparse
 
-
+# Пакет для работы с системными переменными
+npm i -D cross-env
 
 
 ### Dependencies:
 # простой набор обнуляющих стилей 
-npm install normalize.css
+npm i -S normalize.css
 
 # установка библиотеки jquery
 npm i -S jquery

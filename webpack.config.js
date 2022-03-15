@@ -5,9 +5,13 @@ const HTMLWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 //плагин для переноса любых файлов по директории
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+//плагин для переноса любых файлов по директории
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 
-
+//переменная состояния разработки
+const isDev = process.env.NODE_ENV === 'development'
+console.log('Is dev', isDev)
 
 module.exports = {
     //контекст это исходная папка src и все пути будут от нее
@@ -23,7 +27,7 @@ module.exports = {
     //итоговый файл со всеми скриптами
     output: {
         //паттерн для названий файлов bundle
-        filename: '[name].[contenthash].js',
+        filename: '[name].[hash].js',
         path: path.resolve(__dirname, 'dist')
     },
 
@@ -47,14 +51,18 @@ module.exports = {
 
     //настройки для live-server, данные из папки хранятся в оперативной памяти, чтобы их отобразить нужен npm run build
     devServer: {
-        port: 3000
+        port: 3000,
+        hot: isDev
     },
 
     //подключение плагинов
     plugins: [
         new HTMLWebpackPlugin({
             //title: 'Webpack course', не работает если брать шаблон
-            template: './index.html'
+            template: './index.html',
+            minify: {
+                collapseWhitespace: !isDev
+            }
         }),
         new CleanWebpackPlugin(),
         new CopyWebpackPlugin([
@@ -62,17 +70,30 @@ module.exports = {
                 from: path.resolve(__dirname, 'src/favicon.ico'), //перенести из
                 to: path.resolve(__dirname, 'dist') //перенести в
             }
-        ])
+        ]),
+        new MiniCssExtractPlugin({
+            filename: '[name].[hash].css'
+        })
     ],
     module: {
         rules: [
             {
-                test: /\.css$/, //тип используемых файлов
-                use: ['style-loader','css-loader'] //тип загрузчика для этих файлов, справа налево
+                test: /\.css$/, 
+                use: [
+                    //'style-loader', //добавляет полученные стили в head HTML
+                    {
+                        loader: MiniCssExtractPlugin.loader, //выносит css в отдельный файл
+                        options: {
+                            hmr: isDev, //позволяет обновлять данные без перезагрузки страниц в режиме dev
+                            reloadAll: true
+                        }
+                    }, 
+                    'css-loader'
+                ] 
             },
             {
-                test: /\.(png|jpg|svg|gif|webp)$/,
-                use: ['file-loader']
+                test: /\.(png|jpg|svg|gif|webp)$/, //тип используемых файлов
+                use: ['file-loader'] //тип загрузчика для этих файлов, справа налево
             },
             {
                 test: /\.(ttf|woff|woff2|eot)$/,
