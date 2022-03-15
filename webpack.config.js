@@ -20,6 +20,18 @@ module.exports = {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist')
     },
+    resolve: {
+        //указываются расширения файлов, которые можно не указывать в импортах
+        extensions: ['.js', '.json', '.png'],
+        
+        //указываются абсолютные пути, которые можно указывать в импортах
+        alias: {
+            '@': path.resolve(__dirname, 'src'),
+            '@models': path.resolve(__dirname, 'src/models'),
+        }
+    },
+
+
     //подключение плагинов
     plugins: [
         new HTMLWebpackPlugin({
@@ -41,6 +53,14 @@ module.exports = {
             {
                 test: /\.(ttf|woff|woff2|eot)$/,
                 use: ['file-loader']
+            },
+            {
+                test: /\.xml$/,
+                use: ['xml-loader']
+            },
+            {
+                test: /\.csv$/,
+                use: ['csv-loader']
             },
         ]
     }
