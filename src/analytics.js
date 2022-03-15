@@ -11,10 +11,11 @@ function createAnalytics() {
             isDestroyed = true
         },
         getClicks() {
-            if (isDestroyed) 'Analytics was destroyed'
+            if (isDestroyed) `Analytics was destroyed. Total clicks = ${counter}`
             return counter
         }
     }
 }
+console.log('test')
 
 window.analytics = createAnalytics()
