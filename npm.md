@@ -1,15 +1,20 @@
 ### Init install
 
+
+### Dev dependencies:
 # Корневой установщик с базовым функционалом
 npm i -D webpack
-
 # Пакет для работы через команды в консоли
 npm i -D webpack-cli
+# Пакет для работы в режиме live-server
+npm i -D webpack-dev-server
 
 # Плагин для работы с файлами html
 npm install -D html-webpack-plugin
 # Плагин для очистки старых файлов bundle в папке dist
 npm install -D clean-webpack-plugin
+# Плагин для переноса любых файлов по директории проекта
+npm install -D copy-webpack-plugin
 
 
 # Загрузчики для работы с файлами css
@@ -23,5 +28,11 @@ npm i -D csv-loader
 npm i -D papaparse
 
 
+
+
+### Dependencies:
 # простой набор обнуляющих стилей 
 npm install normalize.css
+
+# установка библиотеки jquery
+npm i -S jquery

@@ -1,16 +1,17 @@
-import Post from '@models/Post'
+import Post from '@models/Post' //импорт через alias
+import * as $ from 'jquery'
 
-import json from './assets/json.json' //webpack сразу выполняет .parse()
-import './styles/styles.css' //обязательно расширение
-import logo from './assets/eraser.png'
-import xml from './assets/data.xml'
-import csv from './assets/data.csv'
+import './styles/styles' //без расширений с помощью extensions
+import logo from './assets/eraser'
 
-
+//import json from './assets/json' //webpack сразу выполняет .parse()
+// import xml from './assets/data.xml'
+// import csv from './assets/data.csv'
 
 const post = new Post('webpack post title', logo)
 
-console.log('POST', post.toString())
-console.log('JSON', json)
-console.log('XML', xml)
-console.log('CSV', csv)
+// console.log('JSON', json)
+// console.log('XML', xml)
+// console.log('CSV', csv)
+
+$('pre').addClass('code').html(post.toString())
