@@ -33,7 +33,15 @@ module.exports = {
             {
                 test: /\.css$/, //тип используемых файлов
                 use: ['style-loader','css-loader'] //тип загрузчика для этих файлов, справа налево
-            }
+            },
+            {
+                test: /\.(png|jpg|svg|gif|webp)$/,
+                use: ['file-loader']
+            },
+            {
+                test: /\.(ttf|woff|woff2|eot)$/,
+                use: ['file-loader']
+            },
         ]
     }
 }

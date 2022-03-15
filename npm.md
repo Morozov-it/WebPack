@@ -14,3 +14,10 @@ npm install -D clean-webpack-plugin
 
 # Загрузчики для работы с файлами css
 npm i -D style-loader css-loader
+
+# Загрузчик для работы с файлами типа png
+npm i -D file-loader
+
+
+# простой набор обнуляющих стилей 
+npm install normalize.css
