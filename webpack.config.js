@@ -62,7 +62,7 @@ module.exports = {
 
     //входная точка для работы webpack
     entry: {
-        analytics: './analytics.js',
+        analytics: './analytics.ts',
         main: ['@babel/polyfill', './index.js']
     },
 
@@ -150,6 +150,20 @@ module.exports = {
                     loader: "babel-loader",
                     options: {
                         presets: ['@babel/preset-env'],
+                        plugins: ['@babel/plugin-proposal-class-properties']
+                    }
+                }
+            },
+            {
+                test: /\.ts$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: [
+                            '@babel/preset-env',
+                            '@babel/preset-typescript'
+                        ],
                         plugins: ['@babel/plugin-proposal-class-properties']
                     }
                 }

@@ -47,6 +47,7 @@ npm i -D node-sass
 # Пакет для работы с babel
 npm i -D @babel/core
 npm i -D @babel/preset-env
+npm i -D @babel/preset-typescript
 npm i -D @babel/plugin-proposal-class-properties
 
 
