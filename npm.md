@@ -35,6 +35,8 @@ npm i -D xml-loader
 # Загрузчик для работы с файлами типа csv
 npm i -D csv-loader
 npm i -D papaparse
+# Загрузчик для работы babel
+npm i -D babel-loader
 
 # Пакет для работы с системными переменными
 npm i -D cross-env
@@ -42,6 +44,10 @@ npm i -D cross-env
 npm i -D less
 # Пакет для работы с sass
 npm i -D node-sass
+# Пакет для работы с babel
+npm i -D @babel/core
+npm i -D @babel/preset-env
+npm i -D @babel/plugin-proposal-class-properties
 
 
 ### Dependencies:
@@ -50,3 +56,6 @@ npm i -S normalize.css
 
 # установка библиотеки jquery
 npm i -S jquery
+
+# установка полифила для преобразования кода для браузера
+npm install --save @babel/polyfill

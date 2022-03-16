@@ -57,7 +57,7 @@
 /******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 	// Promise = chunk loading, 0 = chunk loaded
 /******/ 	var installedChunks = {
-/******/ 		"main": 0
+/******/ 		"analytics": 0
 /******/ 	};
 /******/
 /******/ 	var deferredModules = [];
@@ -148,68 +148,22 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push(["./index.js","vendors~analytics~main"]);
+/******/ 	deferredModules.push(["./analytics.js","vendors~analytics~main"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./assets/eraser.png":
-/*!***************************!*\
-  !*** ./assets/eraser.png ***!
-  \***************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (__webpack_require__.p + \"0c2c6065116d92557f308ac30a63b9b9.png\");\n\n//# sourceURL=webpack:///./assets/eraser.png?");
-
-/***/ }),
-
-/***/ "./index.js":
-/*!******************!*\
-  !*** ./index.js ***!
-  \******************/
+/***/ "./analytics.js":
+/*!**********************!*\
+  !*** ./analytics.js ***!
+  \**********************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _models_Post__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @models/Post */ \"./models/Post.js\");\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ \"../node_modules/jquery/dist/jquery.js\");\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _styles_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styles/styles */ \"./styles/styles.css\");\n/* harmony import */ var _styles_styles__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_styles_styles__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _styles_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styles/less */ \"./styles/less.less\");\n/* harmony import */ var _styles_less__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_styles_less__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var _assets_eraser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./assets/eraser */ \"./assets/eraser.png\");\n //импорт через alias\r\n\r\n\r\n //без расширений с помощью extensions\r\n\r\n\r\n\r\n//import json from './assets/json' //webpack сразу выполняет .parse()\r\n// import xml from './assets/data.xml'\r\n// import csv from './assets/data.csv'\r\n\r\nconst post = new _models_Post__WEBPACK_IMPORTED_MODULE_0__[\"default\"]('webpack post title', _assets_eraser__WEBPACK_IMPORTED_MODULE_4__[\"default\"])\r\n\r\n// console.log('JSON', json)\r\n// console.log('XML', xml)\r\n// console.log('CSV', csv)\r\n\r\njquery__WEBPACK_IMPORTED_MODULE_1__('pre').addClass('code').html(post.toString())\r\n\n\n//# sourceURL=webpack:///./index.js?");
-
-/***/ }),
-
-/***/ "./models/Post.js":
-/*!************************!*\
-  !*** ./models/Post.js ***!
-  \************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Post; });\nclass Post {\r\n    constructor(title, img) {\r\n        this.title = title\r\n        this.img = img\r\n        this.data = new Date()\r\n    }\r\n    toString() {\r\n        return JSON.stringify({\r\n            title: this.title,\r\n            img: this.img,\r\n            date: this.data.toJSON()\r\n        }, null, 2)\r\n    }\r\n    get uppercaseTitle() {\r\n        return this.title.toUpperCase()\r\n    }\r\n}\n\n//# sourceURL=webpack:///./models/Post.js?");
-
-/***/ }),
-
-/***/ "./styles/less.less":
-/*!**************************!*\
-  !*** ./styles/less.less ***!
-  \**************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./styles/less.less?");
-
-/***/ }),
-
-/***/ "./styles/styles.css":
-/*!***************************!*\
-  !*** ./styles/styles.css ***!
-  \***************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./styles/styles.css?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ \"../node_modules/jquery/dist/jquery.js\");\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);\n\n\nfunction createAnalytics() {\n  var isDestroyed = false;\n  var counter = 0;\n\n  var listener = function listener() {\n    counter++;\n  };\n\n  jquery__WEBPACK_IMPORTED_MODULE_0__(document).on('click', listener);\n  return {\n    destroy: function destroy() {\n      document.removeEventListener('click', listener);\n      isDestroyed = true;\n    },\n    getClicks: function getClicks() {\n      if (isDestroyed) \"Analytics was destroyed. Total clicks = \".concat(counter);\n      return counter;\n    }\n  };\n}\n\nconsole.log('test');\nwindow.analytics = createAnalytics();\n\n//# sourceURL=webpack:///./analytics.js?");
 
 /***/ })
 

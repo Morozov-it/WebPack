@@ -62,8 +62,8 @@ module.exports = {
 
     //входная точка для работы webpack
     entry: {
-        main: './index.js',
-        analytics: './analytics.js'
+        analytics: './analytics.js',
+        main: ['@babel/polyfill', './index.js']
     },
 
     //итоговый файл со всеми скриптами
@@ -111,20 +111,20 @@ module.exports = {
         ]),
         new MiniCssExtractPlugin({
             filename: filename('css')
-        })
+        }),
     ],
     module: {
         rules: [
             {
-                test: /\.css$/, 
+                test: /\.css$/,
                 use: cssLoaders()
             },
             {
-                test: /\.less$/, 
+                test: /\.less$/,
                 use: cssLoaders('less-loader')
             },
             {
-                test: /\.s[ac]ss$/, 
+                test: /\.s[ac]ss$/,
                 use: cssLoaders('sass-loader')
             },
             {
@@ -143,6 +143,17 @@ module.exports = {
                 test: /\.csv$/,
                 use: ['csv-loader']
             },
+            {
+                test: /\.m?js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ['@babel/preset-env'],
+                        plugins: ['@babel/plugin-proposal-class-properties']
+                    }
+                }
+            }
         ]
     }
 }

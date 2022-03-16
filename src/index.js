@@ -1,4 +1,5 @@
 import Post from '@models/Post' //импорт через alias
+import './babel'
 import * as $ from 'jquery'
 
 import './styles/styles' //без расширений с помощью extensions
@@ -16,3 +17,4 @@ const post = new Post('webpack post title', logo)
 // console.log('CSV', csv)
 
 $('pre').addClass('code').html(post.toString())
+
