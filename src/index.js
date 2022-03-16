@@ -17,3 +17,10 @@ const post = new Post('webpack post title', logo)
 // console.log('CSV', csv)
 $('pre').addClass('code').html(post.toString())
 
+
+
+//lazy loading библиотеки
+import('lodash').then((_) => {
+    console.log('Lodash', _.random(0, 42, true))
+}) 
+

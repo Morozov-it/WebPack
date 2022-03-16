@@ -55,6 +55,8 @@ npm i -D @babel/plugin-proposal-class-properties
 # Пакет для работы с ESLint
 npm i -D eslint
 npm i -D babel-eslint
+# Пакет для анализа сборки
+npm i -D webpack-bundle-analyzer
 
 
 ### Dependencies:

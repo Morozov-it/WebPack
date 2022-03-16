@@ -11,6 +11,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 //плагин для настройки поля оптимизации в webpack.config
 const TerserWebpackPlugin = require('terser-webpack-plugin')
+//плагин для анализа оптимизации плагинов
+const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
 
 
 
@@ -81,6 +83,33 @@ const jsLoaders = () => {
     return loaders
 }
 
+const plugins = () => {
+    const base = [
+        new HTMLWebpackPlugin({
+            //title: 'Webpack course', не работает если брать шаблон
+            template: './index.html',
+            minify: {
+                collapseWhitespace: !isDev
+            }
+        }),
+        new CleanWebpackPlugin(),
+        new CopyWebpackPlugin([
+            {
+                from: path.resolve(__dirname, 'src/favicon.ico'), //перенести из
+                to: path.resolve(__dirname, 'dist') //перенести в
+            }
+        ]),
+        new MiniCssExtractPlugin({
+            filename: filename('css')
+        }),
+    ]
+    if (isProd) {
+        base.push(new BundleAnalyzerPlugin())
+    }
+
+    return base
+}
+
 module.exports = {
     //контекст это исходная папка src и все пути будут от нее
     context: path.resolve(__dirname, 'src'),
@@ -123,25 +152,9 @@ module.exports = {
     devtool: isDev ? 'source-map' : '',
 
     //подключение плагинов
-    plugins: [
-        new HTMLWebpackPlugin({
-            //title: 'Webpack course', не работает если брать шаблон
-            template: './index.html',
-            minify: {
-                collapseWhitespace: !isDev
-            }
-        }),
-        new CleanWebpackPlugin(),
-        new CopyWebpackPlugin([
-            {
-                from: path.resolve(__dirname, 'src/favicon.ico'), //перенести из
-                to: path.resolve(__dirname, 'dist') //перенести в
-            }
-        ]),
-        new MiniCssExtractPlugin({
-            filename: filename('css')
-        }),
-    ],
+    plugins: plugins(),
+
+    //подключение модулей
     module: {
         rules: [
             {
