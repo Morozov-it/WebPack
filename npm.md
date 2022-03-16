@@ -37,6 +37,8 @@ npm i -D csv-loader
 npm i -D papaparse
 # Загрузчик для работы babel
 npm i -D babel-loader
+# Загрузчик для работы ESLint
+npm i -D eslint-loader
 
 # Пакет для работы с системными переменными
 npm i -D cross-env
@@ -50,6 +52,9 @@ npm i -D @babel/preset-env
 npm i -D @babel/preset-react
 npm i -D @babel/preset-typescript
 npm i -D @babel/plugin-proposal-class-properties
+# Пакет для работы с ESLint
+npm i -D eslint
+npm i -D babel-eslint
 
 
 ### Dependencies:

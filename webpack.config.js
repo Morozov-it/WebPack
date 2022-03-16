@@ -37,6 +37,8 @@ const optimization = () => {
 
 const filename = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`;
 
+
+
 const cssLoaders = (extra) => {
     const loader = [
         //'style-loader', //добавляет полученные стили в head HTML
@@ -66,7 +68,18 @@ const babelPreset = (preset) => {
     return options
 }
 
-
+const jsLoaders = () => {
+    const loaders = [
+        {
+            loader: "babel-loader",
+            options: babelPreset()
+        }
+    ]
+    // if (isDev) {
+    //     loaders.push('eslint-loader')
+    // }
+    return loaders
+}
 
 module.exports = {
     //контекст это исходная папка src и все пути будут от нее
@@ -162,10 +175,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader",
-                    options: babelPreset()
-                }
+                use: jsLoaders()
             },
             {
                 test: /\.jsx$/,
