@@ -1,0 +1,42 @@
+.box {
+  margin-top: 5rem;
+  color: blue;
+  text-align: center;
+}
+.box h2 {
+  padding: 1rem;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url(f36638c2135b71e5a623dca52b611173.ttf) format('truetype');
+}
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    padding: 1rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+h1 {
+    text-align: center;
+}
+
+.logo {
+    background-image: url(0c2c6065116d92557f308ac30a63b9b9.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
+    margin: 0 auto;
+}
+.code {
+    color: blue;
+}
+
+/*# sourceMappingURL=main.css.map*/

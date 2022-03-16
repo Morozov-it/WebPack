@@ -76,7 +76,7 @@ module.exports = {
     //входная точка для работы webpack
     entry: {
         analytics: './analytics.ts',
-        main: ['@babel/polyfill', './index.jsx']
+        main: ['@babel/polyfill', './index.js']
     },
 
     //итоговый файл со всеми скриптами
@@ -88,7 +88,7 @@ module.exports = {
 
     resolve: {
         //указываются расширения файлов, которые можно не указывать в импортах
-        extensions: ['.js', '.json', '.png', '.css', '.less', 'scss', 'sass'],
+        extensions: ['.js', 'jsx', '.json', '.png', '.css', '.less', 'scss', 'sass'],
         
         //указываются абсолютные пути, которые можно указывать в импортах
         alias: {
@@ -105,6 +105,9 @@ module.exports = {
         port: 3000,
         hot: isDev
     },
+
+    //создание исходных файлов без минимизации в режиме разработки в папке dist
+    devtool: isDev ? 'source-map' : '',
 
     //подключение плагинов
     plugins: [
