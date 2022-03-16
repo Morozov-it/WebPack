@@ -17,7 +17,10 @@ npm install -D mini-css-extract-plugin
 npm install -D clean-webpack-plugin
 # Плагин для переноса любых файлов по директории проекта
 npm install -D copy-webpack-plugin
-
+# Плагин для настройки поля оптимизации в webpack.config
+npm install -D terser-webpack-plugin
+# Плагин для настройки оптимизации для css файлов
+npm install -D optimize-css-assets-webpack-plugin
 
 # Загрузчики для работы с файлами css
 npm i -D style-loader css-loader

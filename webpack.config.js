@@ -7,11 +7,33 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 //плагин для переноса любых файлов по директории
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+//плагин для настройки оптимизации для css файлов
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+//плагин для настройки поля оптимизации в webpack.config
+const TerserWebpackPlugin = require('terser-webpack-plugin')
+
 
 
 //переменная состояния разработки
 const isDev = process.env.NODE_ENV === 'development'
+const isProd = !isDev
 console.log('Is dev', isDev)
+
+const optimization = () => {
+    const config = {
+        splitChunks: {
+            chunks: 'all'
+        }
+    }
+    //если режим сборки то добавляются плагины по оптимизации
+    if (isProd) {
+        config.minimizer = [
+            new OptimizeCssAssetsPlugin(),
+            new TerserWebpackPlugin()
+        ]
+    }
+    return config
+}
 
 module.exports = {
     //контекст это исходная папка src и все пути будут от нее
@@ -43,11 +65,7 @@ module.exports = {
     },
 
     //создается файл vendors в который отправляются все библиотеки, которые вызываются из разных компонент
-    optimization: {
-        splitChunks: {
-            chunks: 'all'
-        }
-    },
+    optimization: optimization(),
 
     //настройки для live-server, данные из папки хранятся в оперативной памяти, чтобы их отобразить нужен npm run build
     devServer: {
