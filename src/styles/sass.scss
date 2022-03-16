@@ -1,0 +1,13 @@
+$border: 1px solid gray;
+
+.card {
+    margin-top: 5rem;
+    color: red;
+    text-align: center;
+
+    h2 {
+        padding: 1rem;
+        border: $border;
+        border-radius: 10px;
+    }
+}

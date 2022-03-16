@@ -24,6 +24,10 @@ npm install -D optimize-css-assets-webpack-plugin
 
 # Загрузчики для работы с файлами css
 npm i -D style-loader css-loader
+# Загрузчики для работы с файлами less
+npm i -D less-loader
+# Загрузчики для работы с файлами scss
+npm i -D sass-loader
 # Загрузчик для работы с файлами типа png
 npm i -D file-loader
 # Загрузчик для работы с файлами типа xml
@@ -34,6 +38,10 @@ npm i -D papaparse
 
 # Пакет для работы с системными переменными
 npm i -D cross-env
+# Пакет для работы с less
+npm i -D less
+# Пакет для работы с sass
+npm i -D node-sass
 
 
 ### Dependencies:

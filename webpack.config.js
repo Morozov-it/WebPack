@@ -15,7 +15,7 @@ const TerserWebpackPlugin = require('terser-webpack-plugin')
 
 
 //переменная состояния разработки
-const isDev = process.env.NODE_ENV === 'development'
+const isDev = process.env.NODE_ENV === 'development';
 const isProd = !isDev
 console.log('Is dev', isDev)
 
@@ -33,6 +33,26 @@ const optimization = () => {
         ]
     }
     return config
+};
+
+const filename = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`;
+
+const cssLoaders = (extra) => {
+    const loader = [
+        //'style-loader', //добавляет полученные стили в head HTML
+        {
+            loader: MiniCssExtractPlugin.loader, //выносит css в отдельный файл
+            options: {
+                hmr: isDev, //позволяет обновлять данные без перезагрузки страниц в режиме dev
+                reloadAll: true
+            }
+        }, 
+        'css-loader'
+    ]
+    if (extra) {
+        loader.push(extra)
+    }
+    return loader
 }
 
 module.exports = {
@@ -49,13 +69,13 @@ module.exports = {
     //итоговый файл со всеми скриптами
     output: {
         //паттерн для названий файлов bundle
-        filename: '[name].[hash].js',
+        filename: filename('js'),
         path: path.resolve(__dirname, 'dist')
     },
 
     resolve: {
         //указываются расширения файлов, которые можно не указывать в импортах
-        extensions: ['.js', '.json', '.png', '.css'],
+        extensions: ['.js', '.json', '.png', '.css', '.less', 'scss', 'sass'],
         
         //указываются абсолютные пути, которые можно указывать в импортах
         alias: {
@@ -90,24 +110,22 @@ module.exports = {
             }
         ]),
         new MiniCssExtractPlugin({
-            filename: '[name].[hash].css'
+            filename: filename('css')
         })
     ],
     module: {
         rules: [
             {
                 test: /\.css$/, 
-                use: [
-                    //'style-loader', //добавляет полученные стили в head HTML
-                    {
-                        loader: MiniCssExtractPlugin.loader, //выносит css в отдельный файл
-                        options: {
-                            hmr: isDev, //позволяет обновлять данные без перезагрузки страниц в режиме dev
-                            reloadAll: true
-                        }
-                    }, 
-                    'css-loader'
-                ] 
+                use: cssLoaders()
+            },
+            {
+                test: /\.less$/, 
+                use: cssLoaders('less-loader')
+            },
+            {
+                test: /\.s[ac]ss$/, 
+                use: cssLoaders('sass-loader')
             },
             {
                 test: /\.(png|jpg|svg|gif|webp)$/, //тип используемых файлов

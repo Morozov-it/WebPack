@@ -2,6 +2,7 @@ import Post from '@models/Post' //импорт через alias
 import * as $ from 'jquery'
 
 import './styles/styles' //без расширений с помощью extensions
+import './styles/less'
 import logo from './assets/eraser'
 
 //import json from './assets/json' //webpack сразу выполняет .parse()
