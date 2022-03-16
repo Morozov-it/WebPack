@@ -47,6 +47,7 @@ npm i -D node-sass
 # Пакет для работы с babel
 npm i -D @babel/core
 npm i -D @babel/preset-env
+npm i -D @babel/preset-react
 npm i -D @babel/preset-typescript
 npm i -D @babel/plugin-proposal-class-properties
 
@@ -59,4 +60,7 @@ npm i -S normalize.css
 npm i -S jquery
 
 # установка полифила для преобразования кода для браузера
-npm install --save @babel/polyfill
+npm i -S @babel/polyfill
+
+# React
+npm i -S react react-dom

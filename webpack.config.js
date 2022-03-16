@@ -55,6 +55,19 @@ const cssLoaders = (extra) => {
     return loader
 }
 
+const babelPreset = (preset) => {
+    const options = {
+        presets: ['@babel/preset-env'],
+        plugins: ['@babel/plugin-proposal-class-properties']
+    }
+    if (preset) {
+        options.presets.push(preset)
+    }
+    return options
+}
+
+
+
 module.exports = {
     //контекст это исходная папка src и все пути будут от нее
     context: path.resolve(__dirname, 'src'),
@@ -63,7 +76,7 @@ module.exports = {
     //входная точка для работы webpack
     entry: {
         analytics: './analytics.ts',
-        main: ['@babel/polyfill', './index.js']
+        main: ['@babel/polyfill', './index.jsx']
     },
 
     //итоговый файл со всеми скриптами
@@ -144,14 +157,19 @@ module.exports = {
                 use: ['csv-loader']
             },
             {
-                test: /\.m?js$/,
+                test: /\.js$/,
                 exclude: /node_modules/,
                 use: {
                     loader: "babel-loader",
-                    options: {
-                        presets: ['@babel/preset-env'],
-                        plugins: ['@babel/plugin-proposal-class-properties']
-                    }
+                    options: babelPreset()
+                }
+            },
+            {
+                test: /\.jsx$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: babelPreset('@babel/preset-react')
                 }
             },
             {
@@ -159,13 +177,7 @@ module.exports = {
                 exclude: /node_modules/,
                 use: {
                     loader: "babel-loader",
-                    options: {
-                        presets: [
-                            '@babel/preset-env',
-                            '@babel/preset-typescript'
-                        ],
-                        plugins: ['@babel/plugin-proposal-class-properties']
-                    }
+                    options: babelPreset('@babel/preset-typescript')
                 }
             }
         ]
